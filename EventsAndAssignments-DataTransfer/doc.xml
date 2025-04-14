@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EventsAndAssignments-DataTransfer</name>
+    </assembly>
+    <members>
+        <member name="T:EventsAndAssignments_DataTransfer.Controllers.TransferServiceController">
+            <summary>
+            API-контроллер сервиса
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Controllers.TransferServiceController.#ctor(EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl)">
+            <inheritdoc cref="T:EventsAndAssignments_DataTransfer.Controllers.TransferServiceController"/>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Controllers.TransferServiceController.GetServiceLog">
+            <summary>
+            Получить лог работы сервиса
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Controllers.TransferServiceController.GetActivityStatus">
+            <summary>
+            Индикатор работы сервиса в данный момент
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Controllers.TransferServiceController.SuspendService(System.String)">
+            <summary>
+            Приостановить работу сервиса
+            </summary>
+            <param name="comment">Комментарий о приостановке работы сервиса</param>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Controllers.TransferServiceController.ContinueService(System.String)">
+            <summary>
+            Продолжить работу сервиса (если она была приостановлена)
+            </summary>
+            <param name="comment">Комментарий о возобновлении работы сервиса</param>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.DAO.EmployeeRecord">
+            <summary>
+            Структура сведений из записи о трудозанятом. Предполагается, как
+            тип, удобный для сравнения сведений между записями о трудозанятых
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.DTO.DataTransferResult">
+            <summary>
+            Информация о результате передачи данных между БД
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.DTO.DataTransferResult.#ctor(System.DateTime,System.Boolean,System.Int32,System.Int32,System.String)">
+            <summary>
+            Создает экземпляр <see cref="T:EventsAndAssignments_DataTransfer.DTO.DataTransferResult"/> на основании результата передачи данных
+            </summary>
+            <param name="transferTime">Время передачи данных</param>
+            <param name="transferSuccess">Передача данных была успешна</param>
+            <param name="numberOfNewRecords">Количество новых (переданных) записей</param>
+            <param name="totalNumberOfRecords">Общее количество записей (после передачи)</param>
+            <param name="message">Сообщение про результат передачи</param>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.DataTransferResult.EventType">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventType"/>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.DataTransferResult.EventDateTime">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventDateTime"/>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.DataTransferResult.EventInfo">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventInfo"/>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.DTO.RecordModificationTime">
+            <summary>
+            Идентификатор записи и время ее последнего изменения
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.DTO.RecordModificationTime.#ctor(System.Guid,System.DateTime)">
+            <inheritdoc cref="T:EventsAndAssignments_DataTransfer.DTO.RecordModificationTime"/>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.RecordModificationTime.RecordId">
+            <summary>
+            Идентификатор записи
+            </summary>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.RecordModificationTime.LastModificationDate">
+            <summary>
+            Время последнего изменения информации записи
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.DTO.ServiceContinuedEvent">
+            <summary>
+            Событие возобновления работы сервиса
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.DTO.ServiceContinuedEvent.#ctor(System.DateTime,System.String)">
+            <summary>
+            Создает экземпляр <see cref="T:EventsAndAssignments_DataTransfer.DTO.ServiceContinuedEvent"/> на основании времени и комментария события
+            </summary>
+            <param name="eventTime">Время события</param>
+            <param name="message">Комментарий о событии</param>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.ServiceContinuedEvent.EventType">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventType"/>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.ServiceContinuedEvent.EventDateTime">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventDateTime"/>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.ServiceContinuedEvent.EventInfo">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventInfo"/>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.DTO.ServiceSuspendedEvent">
+            <summary>
+            Событие приостановки работы сервиса
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.DTO.ServiceSuspendedEvent.#ctor(System.DateTime,System.String)">
+            <summary>
+            Создает экземпляр <see cref="T:EventsAndAssignments_DataTransfer.DTO.ServiceSuspendedEvent"/> на основании времени и комментария события
+            </summary>
+            <param name="eventTime">Время события</param>
+            <param name="message">Комментарий о событии</param>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.ServiceSuspendedEvent.EventType">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventType"/>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.ServiceSuspendedEvent.EventDateTime">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventDateTime"/>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.DTO.ServiceSuspendedEvent.EventInfo">
+            <inheritdoc cref="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventInfo"/>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent">
+            <summary>
+            Событие сервиса передачи данных
+            </summary>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventType">
+            <summary>
+            Тип события
+            </summary>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventDateTime">
+            <summary>
+            Время события
+            </summary>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent.EventInfo">
+            <summary>
+            Сведения о событии
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.Services.ConnectionStringService">
+            <summary>
+            Генерирует и хранит строки подключение к базам данных, с которыми работает приложение
+            </summary>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Services.ConnectionStringService.EventsAndAssignmentsConnectionString">
+            <summary>
+            Строка подключения к БД EventsAndAssignments
+            </summary>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Services.ConnectionStringService.MIMPublish2ConnectionString">
+            <summary>
+            Строка подключения к MIMPublish2
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.ConnectionStringService.GetConnectionString(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Сгенерировать строки подключения из переменных окружения, или получить их из файла конфигурации
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.ConnectionStringService.LogConnectionStringCondition(Microsoft.Extensions.Logging.ILogger{EventsAndAssignments_DataTransfer.Services.ConnectionStringService})">
+            <summary>
+            Залоггировать состояние строк подключения
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.Services.DbTransferService">
+            <summary>
+            Сервис обмена (репликации) данных между базами данных
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.GetServiceActivityStatus">
+            <inheritdoc cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.GetServiceActivityStatus"/>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.GetServiceLog">
+            <inheritdoc cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.GetServiceLog"/>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.SuspendService(System.String)">
+            <inheritdoc cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.SuspendService"/>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.ContinueService(System.String)">
+            <inheritdoc cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.ContinueService"/>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.GetTimeoutUntilNextLaunch">
+            <summary>
+            Получить отрезок времени до следующего запуска сервиса
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.TransferEmployeesBetweenDb(System.Threading.CancellationToken@)">
+            <summary>
+            Переносит новые данные о трудозанятых между БД-приемником и БД-источником
+            </summary>
+            <remarks>
+            Берет информацию о уже имеющихся записях в БД-приемнике; Находит в БД-источнике
+            записи, которых еще нет в БД-приемнике, либо они изменились в БД-источнике;
+            Передает новые/измененные записи из БД-источника в БД-приемник.
+            </remarks>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.PerformBatchEmployeeTransfer(System.Collections.Generic.List{EventsAndAssignments_DataTransfer.DAO.EmployeeRecord},System.Collections.Generic.List{System.Guid},System.Threading.CancellationToken@)">
+            <summary>
+            На основании контекстов БД, актуальных данных БД-приемника,и новых данных
+            БД-источника произвести пакетный перенос данных (до 1000 штук за раз)
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.SetActualEmployeesInDb(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            На основании переданного списка трудозанятых, пометить их записи в БД, как актуальные
+            </summary>
+            <param name="actualEmployeePositionIds">Ид</param>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.TransferPhotosBetweenDb(System.Threading.CancellationToken@)">
+            <summary>
+            Произвести трансфер фотографий между БД. Обновленным считается фото, у которого изменился размер
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.TransferOrganizationsBetweenDb(System.Threading.CancellationToken@)">
+            <summary>
+            Переносит новые данные об организациях между БД-приемником и БД-источником
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.GetSqlBody(System.String)">
+            <summary>
+            Получает тело SQL запроса из файла папки "SQL" в директории приложения
+            </summary>
+            <param name="file">Имя требуемого файла (SQL запроса)</param>
+        </member>
+        <member name="M:EventsAndAssignments_DataTransfer.Services.DbTransferService.LogServiceEvent(EventsAndAssignments_DataTransfer.Interfaces.IServiceEvent)">
+            <summary>
+            Логгирует событие сервиса во внутренний список событий и логгер приложения
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl">
+            <summary>
+            Средство управления сервисом <see cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferService"/>
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.GetServiceLog">
+            <summary>
+            Получить лог работы сервиса
+            </summary>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.GetServiceLogDelegate">
+            <summary>
+            Делегат метода <see cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.GetServiceLog"/>
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.GetServiceActivityStatus">
+            <summary>
+            Индикатор работы сервиса в данный момент
+            </summary>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.GetServiceActivityStatusDelegate">
+            <summary>
+            Делегат метода <see cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.GetServiceActivityStatus"/>
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.SuspendService">
+            <summary>
+            Приостановить работу сервиса
+            </summary>
+            <param name="comment">Комментарий о приостановке работы сервиса</param>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.SuspendServiceDelegate">
+            <summary>
+            Делегат метода <see cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.SuspendService"/>
+            </summary>
+        </member>
+        <member name="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.ContinueService">
+            <summary>
+            Продолжить работу сервиса (если она была приостановлена)
+            </summary>
+            <param name="comment">Комментарий о возобновлении работы сервиса</param>
+        </member>
+        <member name="P:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.ContinueServiceDelegate">
+            <summary>
+            Делегат метода <see cref="T:EventsAndAssignments_DataTransfer.Services.DbTransferServiceControl.ContinueService"/>
+            </summary>
+        </member>
+    </members>
+</doc>

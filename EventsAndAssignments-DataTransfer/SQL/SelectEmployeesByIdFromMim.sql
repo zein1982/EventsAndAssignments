@@ -1,0 +1,30 @@
+﻿-- Получить записи о требуемых трудозанятых из MIM
+SELECT 
+	EmployeeId,
+    TabelNumber,
+    Domain,
+    [Login],
+    Email,
+    LastName,
+    FirstName,
+    MiddleName,
+    OrganizationCode,
+    OrganizationName,
+    PositionId,
+    PositionCode,
+    PositionName,
+    DepartmentCode,
+    DepartmentName,
+    --Photo,
+    --PhotoS,
+    IsSFRelevant,
+    Occupation,
+    PersonLastModfication,
+    PositionLastModfication,
+    DepartmentLastModfication,
+    OrganizationLastModfication,
+    HireDate,
+    EndDate,
+    AnyLastModfication
+FROM publicViewSchema.PuplicEmployeeView
+WHERE PositionId IN @valuesToGet

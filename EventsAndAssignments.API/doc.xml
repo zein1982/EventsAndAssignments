@@ -1,0 +1,404 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EventsAndAssignments.API</name>
+    </assembly>
+    <members>
+        <member name="M:EventsAndAssignments.API.Configs.DependencyInjectionConfig.Configure(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            Настройка DI
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Configs.MappingConfig.GetConfig">
+            <summary>
+            Зададим глобальный конфиг. Проверка конфига в MappingTests
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Configs.MappingConfig.BuildProtocolInfoString(EventsAndAssignments.Services.DAO.Protocol)">
+            <summary>
+            Собрать строку для отображения информации о протоколе для поручения
+            </summary>
+            <param name="protocol">Протокол в рамках которого создано поручение</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Configs.MappingConfig.BuildShortAssignmentViewName(System.String)">
+            <summary>
+            Собрать короткое имя поручения для отображения
+            </summary>
+            <param name="name">Имя поручения из БД</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Configs.MappingConfig.BuildLongAssignmentViewName(System.String)">
+            <summary>
+            Собрать полное имя поручения для отображения
+            </summary>
+            <param name="name">Имя поручения из БД</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.GetAssignmentById(System.Int64)">
+            <summary>
+            Возвращает поручение по идентификатору
+            </summary>
+            <param name="id">Идентификатор поручения</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.GetAssignmentByVersion(EventsAndAssignments.Models.DTO.Request.AssignmentVersionRequestDTO)">
+            <summary>
+            Возвращает поручение согласно версии поручения
+            </summary>
+            <param name="request">Данные о группе и версии поручения</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.GetAssignments(EventsAndAssignments.Services.Sorts.RequestParams)">
+             <summary>
+             Возвращает поручения согласно фильтрам и сортировкам.
+             </summary>
+             <param name="filter">The filter.</param>
+             <remarks>
+             Примеры запроса для получения поручений
+            
+                 POST /api/Assignments/GetAssignments
+                 {
+                     "count": 100,
+                     "roleId": null,
+                     "positionId": "34cbf4a3-a9e8-ed11-b3d6-0050569a16c1",
+                     "page": 1,
+                     "parentId": null,
+                     "year": 2100,
+                     "sorts": [{
+                         "name": "Created",
+                         "selected": true,
+                         "sortdirection": "ascending"
+                     }],
+                     "filters": [{
+                         "name": "Created",
+                         "filterType": 3,
+                         "label": "Дата создания",
+                         "items":[
+                         {
+                             "value": "2023-07-31T07:05:23.000Z",
+                             "selected": true
+                         },
+                         {
+                             "value": "2023-08-01T07:05:23.000Z",
+                             "selected": true
+                         }
+                     ]
+                     }]
+                 }
+            
+             </remarks>>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.GetAssignmentsIds(EventsAndAssignments.Services.Sorts.RequestParams)">
+            <summary>
+            Возвращает ID поручений согласно фильтрам и сортировкам.
+            </summary>
+            <param name="filter">The filter.</param>
+            <remarks>
+            </remarks>>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.GetAllAssignmentVersions(System.Int64)">
+            <summary>
+            Получить список всех версий и подверсий поручения (для построения дерева версий)
+            </summary>
+            <param name="assignmentId">Идентификатор группы поручения</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.CreateAssignment(System.Int64)">
+            <summary>
+            Создает новое поручение
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.CopyAssignment(EventsAndAssignments.Models.DTO.Request.CopyAssignmentDtoRequest)">
+            <summary>
+            Копирует выбранные поручения
+            </summary>
+            <param name="copyAssignment">Список поручений для копирования</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.UpdateAssignmentShort(EventsAndAssignments.Models.DTO.Request.AssignmentShortRequestDto)">
+            <summary>
+            Обновляет поручение (для поручений в списке у протокола). Короткая версия
+            </summary>
+            <param name="assignmentDto">Данные поручения со строки таблицы</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.UpdateAssignment(EventsAndAssignments.Models.DTO.Request.AssignmentRequestDto)">
+            <summary>
+            Обновляет и размножает (в случае необходимости) поручение. Полная версия (для данных с основной формы)
+            </summary>
+            <param name="assignmentDto">Данные поручения с формы</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.RemoveAssignment(EventsAndAssignments.Models.DTO.Request.RemoveRequest{System.Int64})">
+            <summary>
+            Удаляет поручения
+            </summary>
+            <param name="removeRequest">Список идентификаторов поручений подлежащих удалению</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentsController.RestoreNotificationsOnAssignments(System.Collections.Generic.ICollection{System.Int64})">
+            <summary>
+            Обновить уведомления по поручению
+            </summary>
+            <param name="assignmentsIds">Список идентификаторов поручений</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.AssignmentCountController.GetAssignmentsCount(System.String)">
+            <summary>
+            Возвращает общее количетсво поручений и количество поручений не в статусе "Готово" для трудозанятого
+            (не реализовано)
+            </summary>
+            <param name="employeeEmail">Email трудозанятого</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.CommentController.GetComments(System.Int64)">
+            <summary>
+            Получить список комментариев для конкретного поручения
+            </summary>
+            <param name="assignmentId">Идентификатор поручения</param>
+            <returns>Список комментариев</returns>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.CommentController.GetLastComment(System.Int64)">
+            <summary>
+            Получить последний комментарий по идентификатору поручения
+            </summary>
+            <returns>Последний комментарий по выбранному поручению</returns>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.CommentController.CreateComment(EventsAndAssignments.Models.DTO.Request.CommentRequestDto)">
+            <summary>
+            Создает комментарий для текущего поручения
+            </summary>
+            <param name="comment">Данные комментария</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.CompanyController.GetCompanyById(System.Guid)">
+            <summary>
+            Получить организацию по идентификатору
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.CompanyController.GetAllCompanies(EventsAndAssignments.Models.DTO.Request.GetCompanyRequestDto)">
+            <summary>
+            Получить список организаций согласно названию
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.DataSeedController.Seed">
+            <summary>
+            Возвращает поручение по идентификатору
+            </summary>
+            <remarks>
+            Заполнить БД начальным набором данных. Метод заполняет данными только если таблица пустая.
+            Пароль по умолчанию только вставляет данные если их нет, если введен пароль,
+            то БД будет удалена и вновь создана с данными по умолчанию.
+            </remarks>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.EmployeesController.GetCurrentEmployee">
+            <summary>
+            Возвращает текущего сотрудника (по токену авторизации)
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.EmployeesController.GetEmployeesByName(System.String,System.Int32)">
+            <summary>
+            Вернуть трудозанятых по совпадению в фамилии/имени/отчестве
+            </summary>
+            <param name="name">Аргумент фильтра, допускающий указание
+             пользовательских данных в последовательности "фамилия имя отчество"</param>
+            <param name="count">Количество возвращаемых результатов</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.EmployeesController.GetEmployeeById(System.Guid)">
+            <summary>
+            Вернуть трудозанятых по идентификатору
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.EmployeesController.GetEmployeePhotoById(System.Guid,System.Boolean)">
+            <summary>
+            Возвращает фотографию пользователя по идентификатору
+            </summary>
+            <param name="id">Идентификатор сотрудника</param>
+            <param name="isSmall">Тип фотографии (полный или уменьшенный вариант). По умолчанию уменьшенный</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FilesController.UploadFile(Microsoft.AspNetCore.Http.IFormFile,System.Int64)">
+            <summary>
+            Загрузка файла (с привязкой в поручению)
+            </summary>
+            <param name="file">Файл</param>
+            <param name="assignmentId">Id поручения, к которому будет прикреплен файл</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FilesController.DownloadFile(System.Int64)">
+            <summary>
+            Скачивание файла из базы данных
+            </summary>
+            <param name="fileId">Id файла который мы хотим скачать</param>
+            <returns>файл</returns>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FilesController.RemoveFile(System.Int64)">
+            <summary>
+            Удаляет выбранный файл.
+            </summary>
+            <param name="fileId">Id удаленного файла.</param>
+            <returns>возвращает dto модель к файлу</returns>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FilterController.GetFolderFilters">
+            <summary>
+            Фильтры для папок
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FoldersController.CreateFolder(EventsAndAssignments.Models.DTO.Request.CreateFolderRequest)">
+            <summary>
+            Создает папку протоколов
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FoldersController.GetFolder(System.Int64)">
+            <summary>
+            Возвращает папку протоколов согласно id
+            </summary>
+            <param name="id">Идентификатор папки</param>
+            <remarks>
+            пример: 3
+            </remarks>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FoldersController.UpdateFolder(EventsAndAssignments.Models.DTO.Request.UpdateFolderRequest)">
+            <summary>
+            Изменяет (переименовывает) папку протоколов
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FoldersController.GetFolders(EventsAndAssignments.Services.Sorts.RequestParams)">
+            <summary>
+            Возвращает папки протоколов
+            </summary>
+            <param name="filter">фильтры и сортировки </param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FoldersController.RemoveFolder(EventsAndAssignments.Models.DTO.Request.RemoveRequest{System.Int64})">
+             <summary>
+             Удалить (пометить, как удаленную или архивировать) папку протокола
+             В зависимостти от роли пользователя сервис отправляет заявку на удаление или автоматически удаляет\архивирует
+             </summary>
+             <param name="request">Список Id которые нужно удалить</param>
+             <remarks>
+             Sample request:
+            
+                 POST /api/Folders/RemoveFolder
+                 {
+                    "description": "Причина удаления",
+                    "removedItems": [12, 13]
+                 }
+            
+             </remarks>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FoldersController.GetEmployeesAllowedToFolder(System.Int64)">
+            <summary>
+            Получить список пользователей имеющих доступ к папке
+            </summary>
+            <param name="folderId">Идентификатор папки</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FoldersController.AddAllowedEmployee(System.Int64,System.Guid)">
+            <summary>
+            Добавить пользователя в список пользователей имеющих доступ к папке
+            </summary>
+            <param name="folderId">Идентификатор папки</param>
+            <param name="employeeId">Идентификатор пользователя</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.FoldersController.RemoveAllowedEmployee(System.Int64,System.Guid)">
+            <summary>
+            Исключить пользователя из списка пользователей имеющих доступ к папке
+            </summary>
+            <param name="folderId">Идентифкатор папки</param>
+            <param name="employeeId">Идентификатор пользователя</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.NotificationController.GetNotificationCount(System.String)">
+            <summary>
+            Количество новых уведомлений для пользователя //Не реализованно
+            </summary>
+            <param name="email">Email пользователя</param>
+            <returns>количество уведомлений для пользователя</returns>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.NotificationController.GetNotificationSettings">
+            <summary>
+            Настройки уведомлений для текущего пользователя
+            </summary>
+            <returns>Настройки уведомлений для текущего пользователя</returns>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.NotificationController.SetNotificationSettings(EventsAndAssignments.Models.DTO.Request.NotificationSettingRequestDTO)">
+            <summary>
+            Установка настроек для текущего пользователя
+            </summary>
+            <returns>Результат </returns>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.NotificationController.SendNotificationsOnAssignments(System.Collections.Generic.ICollection{System.Int64})">
+            <summary>
+            Разослать уведомления по выбранным поручениям (НЕ РЕАЛИЗОВАНО)
+            </summary>
+            <param name="assignmentsIds">Список идентификаторов поручений</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.ProtocolsController.GetProtocols(EventsAndAssignments.Services.Sorts.RequestParams)">
+            <summary>
+            Возвращает список протоколов
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.ProtocolsController.GetShortProtocolReport(System.Int64)">
+            <summary>
+            Поучение данных для короткого отчета по протоколу
+            </summary>
+            <param name="protocolId">The identifier.</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.ProtocolsController.CreateProtocol(EventsAndAssignments.Models.DTO.Request.CreateProtocolRequestDTO)">
+            <summary>
+            Создание протокола
+            </summary>
+            <param name="protocolDto">Данные о создателе и дате создания</param>
+            <returns>Созданный протокол</returns>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.ProtocolsController.UpdateProtocol(EventsAndAssignments.Models.DTO.Request.UpdateProtocolRequestDTO)">
+             <summary>
+             Обновление протокола.
+             </summary>
+             <param name="protocoldto">The protocoldto.</param>
+             <returns>CreateProtocolResponseDTO</returns>
+             <remarks>
+             Пример запроса:
+            
+                 POST /api/Protocols/UpdateProtocol
+                 {
+                    "Id": 10,
+                    "Name": "Новое имя"
+                 }
+            
+             </remarks>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.ProtocolsController.RemoveProtocol(EventsAndAssignments.Models.DTO.Request.RemoveRequest{System.Int64})">
+             <summary>
+             Удаляет протокол
+             </summary>
+             <remarks>
+             Пример запроса:
+            
+                 POST /api/Protocols/RemoveProtocol
+                 {
+                    "description": "причина удаления",
+                    "itemsToRemove": "[2, 10]"
+                 }
+            
+             </remarks>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.ReportController.GetExcelReportByProtocol(EventsAndAssignments.Models.DTO.Request.ExcelProtocolReportRequestDTO)">
+            <summary>
+            Получения архива с Excel файлами(отчеты по протоколам).
+            </summary>
+            <param name="reportResponseDto">Id протоколов по которым нужно получить отчет.</param>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.ReportController.GetReportByAssignments(EventsAndAssignments.Models.DTO.Request.ByIdListRequest)">
+            <summary>
+            Отчет по поручениям.
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.API.Controllers.ReportController.GetShortAssignmentReport(EventsAndAssignments.Models.DTO.Request.ExcelProtocolReportRequestDTO)">
+            <summary>
+            короткий отчет по поручениям.
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.Api.Configs.ConnectionStringBuilder.GetDefaultConnectionString(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Вычисляет стандартную строку подключения
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.Api.Configs.ConnectionStringBuilder.GetHseConnectionString(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Вычисляет стандартную строку подключения
+            </summary>
+        </member>
+        <member name="M:EventsAndAssignments.Api.Configs.ConnectionStringBuilder.GetConnectionStringForMigration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Строка подключения для миграций на тест.
+            </summary>
+        </member>
+    </members>
+</doc>

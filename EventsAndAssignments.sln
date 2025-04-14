@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsAndAssignments.API", "EventsAndAssignments.API\EventsAndAssignments.API.csproj", "{12D31316-BE4A-411C-8D91-2A60D8991039}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsAndAssignments.Db", "EventsAndAssignments.Db\EventsAndAssignments.Db.csproj", "{C5D00E6B-C533-49DE-9206-386457471931}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsAndAssignments.Services", "EventsAndAssignments.Services\EventsAndAssignments.Services.csproj", "{DFDDC498-A259-4516-B349-C9B1013BCDA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsAndAssignments.Tests", "EventsAndAssignments.Tests\EventsAndAssignments.Tests.csproj", "{17EDFB0A-679D-4C3F-B34A-EF3D232AC5A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsAndAssignments.Infrastructure", "EventsAndAssignments.Infrastructure\EventsAndAssignments.Infrastructure.csproj", "{CB82A2FE-C260-4888-849E-89789C589D70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{E97D6D7D-7563-4A12-8034-1A29BA65E094}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\docs\classdiagram.puml = ..\..\docs\classdiagram.puml
+		..\..\docs\EventsAndAssignments.API.md = ..\..\docs\EventsAndAssignments.API.md
+		..\..\docs\EventsAndAssignments.Db.md = ..\..\docs\EventsAndAssignments.Db.md
+		..\..\docs\EventsAndAssignments.Infrastructure.md = ..\..\docs\EventsAndAssignments.Infrastructure.md
+		..\..\docs\EventsAndAssignments.Models.md = ..\..\docs\EventsAndAssignments.Models.md
+		..\..\docs\EventsAndAssignments.Services.md = ..\..\docs\EventsAndAssignments.Services.md
+		..\..\docs\EventsAndAssignments.Tests.md = ..\..\docs\EventsAndAssignments.Tests.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EA2A0DD6-1CAC-4644-A263-050F68FB4C0E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsAndAssignments.Models", "EventsAndAssignments.Models\EventsAndAssignments.Models.csproj", "{A740F285-FD75-4EA9-8D02-18AFE08EE415}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsAndAssignments.Migrator", "EventsAndAssignments.Migrator\EventsAndAssignments.Migrator.csproj", "{943041BE-4044-4D7F-9B80-13B59DEC1C41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsAndAssignments-DataTransfer", "EventsAndAssignments-DataTransfer\EventsAndAssignments-DataTransfer.csproj", "{1B43E38E-D13B-4557-9475-B5C8BC932975}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12D31316-BE4A-411C-8D91-2A60D8991039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D31316-BE4A-411C-8D91-2A60D8991039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D31316-BE4A-411C-8D91-2A60D8991039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D31316-BE4A-411C-8D91-2A60D8991039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5D00E6B-C533-49DE-9206-386457471931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D00E6B-C533-49DE-9206-386457471931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D00E6B-C533-49DE-9206-386457471931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D00E6B-C533-49DE-9206-386457471931}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFDDC498-A259-4516-B349-C9B1013BCDA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFDDC498-A259-4516-B349-C9B1013BCDA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFDDC498-A259-4516-B349-C9B1013BCDA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFDDC498-A259-4516-B349-C9B1013BCDA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EDFB0A-679D-4C3F-B34A-EF3D232AC5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EDFB0A-679D-4C3F-B34A-EF3D232AC5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EDFB0A-679D-4C3F-B34A-EF3D232AC5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EDFB0A-679D-4C3F-B34A-EF3D232AC5A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB82A2FE-C260-4888-849E-89789C589D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB82A2FE-C260-4888-849E-89789C589D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB82A2FE-C260-4888-849E-89789C589D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB82A2FE-C260-4888-849E-89789C589D70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A740F285-FD75-4EA9-8D02-18AFE08EE415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A740F285-FD75-4EA9-8D02-18AFE08EE415}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A740F285-FD75-4EA9-8D02-18AFE08EE415}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A740F285-FD75-4EA9-8D02-18AFE08EE415}.Release|Any CPU.Build.0 = Release|Any CPU
+		{943041BE-4044-4D7F-9B80-13B59DEC1C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{943041BE-4044-4D7F-9B80-13B59DEC1C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{943041BE-4044-4D7F-9B80-13B59DEC1C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{943041BE-4044-4D7F-9B80-13B59DEC1C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B43E38E-D13B-4557-9475-B5C8BC932975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B43E38E-D13B-4557-9475-B5C8BC932975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B43E38E-D13B-4557-9475-B5C8BC932975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B43E38E-D13B-4557-9475-B5C8BC932975}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69899363-30DA-470A-AE10-52B77BBA3D7D}
+	EndGlobalSection
+EndGlobal
